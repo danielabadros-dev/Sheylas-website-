@@ -428,6 +428,70 @@ a {
   margin-top: 28px;
 }
 
+/* About full (sobre-mi.html) — dark dynamic version */
+.about-full {
+  background: var(--color-charcoal);
+  color: var(--color-text-light);
+}
+
+.about-full .container {
+  max-width: 1000px;
+}
+
+.about-intro {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(245, 245, 245, 0.85);
+  margin-bottom: 64px;
+}
+
+.about-intro strong {
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.about-traits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  text-align: center;
+}
+
+.trait {
+  padding: 40px 28px;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.trait:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-6px);
+}
+
+.trait-icon {
+  display: block;
+  font-size: 1.3rem;
+  color: var(--color-gold);
+  margin-bottom: 16px;
+}
+
+.trait h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--color-text-light);
+  margin-bottom: 12px;
+}
+
+.trait p {
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(245, 245, 245, 0.6);
+}
+
 /* ===== Section CTA (links to dedicated pages) ===== */
 .section-cta {
   text-align: center;
@@ -1088,6 +1152,15 @@ a {
 
   .about, .gallery, .pricing, .pricing-teaser, .contact, .faq, .legal {
     padding: 80px 0;
+  }
+
+  .about-traits {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about-intro {
+    margin-bottom: 40px;
   }
 
   .page-hero { padding: 130px 0 56px; }
