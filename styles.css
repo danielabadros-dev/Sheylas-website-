@@ -241,6 +241,28 @@ a {
   width: 100%;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-instagram {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-instagram svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-text-light);
+  transition: fill var(--transition);
+}
+
+.nav-instagram:hover svg {
+  fill: var(--color-gold);
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -1077,6 +1099,22 @@ a {
 
 .footer-info a:hover {
   color: var(--color-gold);
+}
+
+.footer-info .footer-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-info .footer-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: rgba(245, 245, 245, 0.7);
+  transition: fill var(--transition);
+}
+
+.footer-info .footer-icon:hover svg {
+  fill: var(--color-gold);
 }
 
 .footer-nav {
