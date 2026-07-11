@@ -1,6 +1,6 @@
 # Proyecto Sheyla — Web de fotografía
 
-- URL en producción: https://sheylas-website.vercel.app/
+- URL en producción: https://www.bysheylaphotography.com/
 - Cliente: Sheyla (_by.sheyla), fotografía de retrato y editorial
 - Hosting: Vercel
 - Tipo: portfolio fotográfico (HTML, CSS, JS/Python), usado como pieza de muestra/social proof para conseguir nuevos clientes
