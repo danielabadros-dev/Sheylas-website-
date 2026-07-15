@@ -193,12 +193,20 @@ a {
 }
 
 .nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-heading);
   font-style: italic;
   font-size: 1.4rem;
   color: var(--color-gold);
   text-decoration: none;
   letter-spacing: 1px;
+}
+
+.nav-logo-icon {
+  height: 38px;
+  width: auto;
 }
 
 .nav-menu {
@@ -323,6 +331,21 @@ a {
   position: relative;
   z-index: 2;
   padding: 0 24px;
+}
+
+.hero::after,
+.page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('images/logo.svg') no-repeat center / min(58vmin, 480px);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.hero-emblem {
+  width: clamp(72px, 12vw, 104px);
+  margin: 0 auto 24px;
 }
 
 .hero-logo {
@@ -1071,6 +1094,11 @@ a {
   padding: 64px 0 32px;
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-emblem {
+  width: 58px;
+  margin: 0 auto 18px;
 }
 
 .footer-logo {
