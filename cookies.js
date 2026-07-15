@@ -24,8 +24,8 @@
 
   function loadGa() {
     if (!GA_ID) return;
+    window["ga-disable-" + GA_ID] = false;
     if (document.getElementById("ga-script")) {
-      window["ga-disable-" + GA_ID] = false;
       return;
     }
     window.dataLayer = window.dataLayer || [];
