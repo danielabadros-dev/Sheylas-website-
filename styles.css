@@ -1303,3 +1303,51 @@ a {
   .container { padding: 0 22px; }
   .pricing-card { padding: 40px 26px; }
 }
+
+/* ============ Cookie banner ============ */
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  padding: 20px 32px;
+  background: var(--color-charcoal);
+  border-top: 1px solid rgba(201, 169, 110, 0.35);
+}
+
+.cookie-banner-text {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  max-width: 640px;
+}
+
+.cookie-banner-text a {
+  color: var(--color-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cookie-banner-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    padding: 18px 22px;
+  }
+
+  .cookie-banner-actions {
+    justify-content: center;
+  }
+}
