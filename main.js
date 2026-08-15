@@ -49,6 +49,24 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+// Lazy-load the gallery video (avoids a large download competing with critical
+// resources during initial page load — it only starts once it's near the viewport)
+const lazyVideo = document.querySelector('video[data-src]');
+if (lazyVideo) {
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const video = entry.target;
+        video.src = video.dataset.src;
+        video.removeAttribute('data-src');
+        video.play().catch(() => {});
+        videoObserver.unobserve(video);
+      }
+    });
+  }, { rootMargin: '200px', threshold: 0.1 });
+  videoObserver.observe(lazyVideo);
+}
+
 // Contact form (front-end only)
 const form = document.getElementById('contactForm');
 if (form) {
