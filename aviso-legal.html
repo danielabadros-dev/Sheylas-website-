@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="images/logo.svg">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="animations.css">
 </head>
 <body>
 
@@ -44,9 +45,11 @@
 
   <!-- Page hero -->
   <header class="page-hero">
-    <div class="page-hero-content fade-in visible">
+    <div class="hero-mesh-bg" aria-hidden="true"></div>
+    <div class="hero-glows" aria-hidden="true"><span class="glow-1"></span><span class="glow-2"></span></div>
+    <div class="page-hero-content" data-scroll-fade>
       <span class="section-label">Legal</span>
-      <h1 class="page-hero-title">Aviso legal</h1>
+      <h1 class="page-hero-title" data-blur-text="words" data-blur-trigger="mount" data-blur-delay="120">Aviso legal</h1>
     </div>
   </header>
 
@@ -123,6 +126,7 @@
   </footer>
 
   <script src="main.js"></script>
+  <script src="animations.js"></script>
   <script src="cookies.js"></script>
 </body>
 </html>

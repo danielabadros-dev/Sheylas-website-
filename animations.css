@@ -1,0 +1,209 @@
+/* ===== Sistema de animaciones cinematográficas =====
+   Portado de la skill `animaciones-cinematicas` (pensada para Next.js + Tailwind +
+   motion) a HTML/CSS/JS plano, conservando sus parámetros: easing [0.22,1,0.36,1],
+   reveal de 800ms con blur 8px, stagger de 90ms, fondos en bucle de 14-22s.
+   Se carga después de styles.css, así que lo de aquí gana a lo de allí. */
+
+:root {
+  --ease-cine: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ===== Reveal al hacer scroll: opacity 0→1, y 32→0, blur 8px→0, 800ms ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(32px);
+  filter: blur(8px);
+  transition:
+    opacity 0.8s var(--ease-cine),
+    transform 0.8s var(--ease-cine),
+    filter 0.8s var(--ease-cine);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Stagger entre ítems de una misma lista (la skill pide 80-100ms) */
+.fade-in.delay-1 { transition-delay: 0.09s; }
+.fade-in.delay-2 { transition-delay: 0.18s; }
+.fade-in.delay-3 { transition-delay: 0.27s; }
+
+/* ===== Titulares palabra a palabra desde el desenfoque ===== */
+.blur-text {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(14px);
+  will-change: opacity, filter, transform;
+}
+
+.blur-text.shown {
+  animation: blur-text-in 0.8s var(--ease-cine) both;
+  will-change: auto;
+}
+
+/* Los tres pasos equivalen al times:[0,0.5,1] de la skill */
+@keyframes blur-text-in {
+  0%   { opacity: 0;   filter: blur(10px); transform: translateY(14px); }
+  50%  { opacity: 0.6; filter: blur(4px);  transform: translateY(-2px); }
+  100% { opacity: 1;   filter: blur(0);    transform: translateY(0); }
+}
+
+/* ===== Entrada al cargar para contenido above the fold ===== */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(1rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out both;
+}
+
+/* Solo opacidad: para elementos que ya usan transform para colocarse
+   (el indicador de scroll va centrado con translateX y no admite otra). */
+@keyframes fade-in-soft {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in-soft 0.8s ease-out both;
+}
+
+/* ===== Fondo mesh-gradient en movimiento constante ===== */
+@keyframes mesh-drift {
+  0%   { background-position: 15% 20%, 85% 15%, 50% 90%; }
+  50%  { background-position: 35% 40%, 65% 35%, 40% 70%; }
+  100% { background-position: 15% 20%, 85% 15%, 50% 90%; }
+}
+
+.hero-mesh-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(40% 40% at 50% 50%, color-mix(in srgb, var(--color-gold) 22%, transparent), transparent 70%),
+    radial-gradient(35% 35% at 50% 50%, color-mix(in srgb, var(--color-offwhite) 10%, transparent), transparent 70%),
+    radial-gradient(45% 45% at 50% 50%, color-mix(in srgb, var(--color-gold-dark) 20%, transparent), transparent 70%);
+  background-repeat: no-repeat;
+  background-size: 140% 140%;
+  animation: mesh-drift 22s ease-in-out infinite;
+  will-change: background-position;
+}
+
+/* ===== Halos de luz que flotan y laten ===== */
+@keyframes glow-float {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.55; }
+  50%      { transform: translate(6%, 8%) scale(1.12); opacity: 0.85; }
+}
+
+.hero-glows {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-glows span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(64px);
+  animation: glow-float 14s ease-in-out infinite;
+}
+
+.hero-glows .glow-1 {
+  top: -6rem;
+  left: 10%;
+  width: 20rem;
+  height: 20rem;
+  background: color-mix(in srgb, var(--color-gold) 25%, transparent);
+}
+
+.hero-glows .glow-2 {
+  top: 33%;
+  right: 5%;
+  width: 18rem;
+  height: 18rem;
+  background: color-mix(in srgb, var(--color-gold-dark) 22%, transparent);
+  animation-delay: -7s;
+}
+
+/* El contenido del hero va por encima de las capas de luz */
+.hero-content,
+.page-hero-content,
+.scroll-indicator {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== Insignias que flotan ===== */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+.animate-float-soft {
+  display: inline-block;
+  animation: float-soft 4s ease-in-out infinite;
+}
+
+/* ===== Brillo que recorre el CTA principal ===== */
+@keyframes shine-sweep {
+  0%        { transform: translateX(-120%) skewX(-20deg); }
+  60%, 100% { transform: translateX(260%) skewX(-20deg); }
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-white) 45%, transparent),
+    transparent
+  );
+  animation: shine-sweep 3.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ===== Parallax de las fotos de la galería =====
+   El wrapper lo crea animations.js: así el desplazamiento del scroll no pelea
+   con la transición del zoom de hover, que sigue viviendo en la imagen. */
+.parallax-inner {
+  display: block;
+  will-change: transform;
+}
+
+/* El scale base deja margen para que el desplazamiento no descubra los bordes:
+   scale 1.06 → 3% por lado → y máximo ±2.5% (regla de la skill). */
+.gallery-item .parallax-inner {
+  transform: scale(1.06);
+}
+
+/* ===== Accesibilidad — no negociable ===== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .fade-in { opacity: 1; transform: none; filter: none; }
+  .blur-text { opacity: 1; filter: none; transform: none; }
+  .gallery-item .parallax-inner { transform: none; }
+}
